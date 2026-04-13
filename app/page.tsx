@@ -29,7 +29,7 @@ const organizationSchema = {
   },
   sameAs: [
     "https://www.linkedin.com/company/webspires",
-    "https://www.instagram.com/webspires.pk",
+    "https://www.instagram.com/atif._.jan",
     "https://www.facebook.com/webspires"
   ],
 };
