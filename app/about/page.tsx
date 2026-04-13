@@ -39,19 +39,27 @@ export default function AboutPage() {
 
           {/* Visual */}
           <div className="relative">
-            <div className="aspect-square rounded-2xl bg-brand-dark-2 border border-white/5 overflow-hidden flex items-center justify-center">
-              <div className="text-center p-12">
-                <div className="w-56 h-20 relative flex items-center justify-center mx-auto mb-4">
-                  <Image src="/logo.png" alt="Webspires Logo" fill className="object-contain" />
-                </div>
-                <p className="text-brand-gray text-sm mt-2">
+            <div className="aspect-square rounded-[2rem] bg-brand-dark-2 border border-white/5 overflow-hidden relative shadow-2xl group">
+              <Image 
+                src="https://wordpress-1196470-4364598.cloudwaysapps.com/wp-content/uploads/2025/02/graphic-design-min-scaled-1.webp" 
+                alt="Webspires Graphic Design" 
+                fill 
+                unoptimized
+                className="object-cover transition-transform duration-700 group-hover:scale-105" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent opacity-80" />
+              <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                <p className="text-brand-red font-heading font-bold text-sm tracking-widest uppercase mb-1">
+                  Creative Excellence
+                </p>
+                <p className="text-white text-lg font-medium">
                   Your Reliable Digital Partner
                 </p>
               </div>
             </div>
             {/* Decorative */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 border border-brand-red/20 rounded-2xl" />
-            <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-brand-red/10 rounded-xl" />
+            <div className="absolute -top-6 -right-6 w-32 h-32 border-2 border-brand-red/20 rounded-3xl -z-10 transition-transform group-hover:rotate-6 duration-500" />
+            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-brand-red/20 rounded-full blur-[40px] -z-10" />
           </div>
         </div>
 
