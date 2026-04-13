@@ -28,22 +28,17 @@ const organizationSchema = {
     email: "hello@webspires.com.pk",
   },
   sameAs: [
-    "https://www.linkedin.com/in/atif-jan-20703017a/",
-    "https://www.instagram.com/atif._.jan",
-    "https://www.facebook.com/atifjan344"
+    "https://www.linkedin.com/company/webspires",
+    "https://www.instagram.com/webspires.pk",
+    "https://www.facebook.com/webspires"
   ],
 };
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Webspires",
+  name: "Webspires Website",
   url: "https://webspires.com.pk",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://webspires.com.pk/search?q={search_term_string}",
-    "query-input": "required name=search_term_string",
-  },
 };
 
 export default function HomePage() {

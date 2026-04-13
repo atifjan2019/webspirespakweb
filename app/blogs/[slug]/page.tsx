@@ -29,15 +29,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const author = getAuthorName(post);
   const plainTitle = post.title.rendered.replace(/<[^>]+>/g, "");
 
+  let description = seo?.description || `Read our latest article on ${plainTitle}`;
+  if (plainTitle.includes('ChatGPT-5') || plainTitle.includes('GPT-OSS')) {
+    description = "Discover the latest AI advancements — key features, real-world use cases, pricing, and how businesses are leveraging OpenAI's most powerful models.";
+  }
+
   return {
     title: seo?.title || plainTitle,
-    description: seo?.description || `Read our latest article on ${plainTitle}`,
+    description: description,
     alternates: {
       canonical: `https://webspires.com.pk/blogs/${post.slug}`,
     },
     openGraph: {
       title: seo?.title || plainTitle,
-      description: seo?.description || `Read our latest article on ${plainTitle}`,
+      description: description,
       type: "article",
       publishedTime: post.date,
       modifiedTime: post.modified,
@@ -140,7 +145,12 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Content */}
         <div
           className="wp-content"
-          dangerouslySetInnerHTML={{ __html: post.content.rendered.replace(/https:\/\/wordpress-1196470-4364598\.cloudwaysapps\.com\/([a-zA-Z0-9_-]+)\/?/g, "https://webspires.com.pk/blogs/$1") }}
+          dangerouslySetInnerHTML={{ __html: post.content.rendered
+            .replace(/https:\/\/wordpress-1196470-4364598\.cloudwaysapps\.com\/([a-zA-Z0-9_-]+)\/?/g, "https://webspires.com.pk/blogs/$1")
+            .replace(/\b(web development)\b/gi, '<a href="/services/web-development" style="color:#e8192c;text-decoration:underline;">$1</a>')
+            .replace(/\b(SEO|Search Engine Optimization)\b/gi, '<a href="/services/seo" style="color:#e8192c;text-decoration:underline;">$1</a>')
+            .replace(/\b(AI search visibility|AI search results)\b/gi, '<a href="/services/geo-optimisation" style="color:#e8192c;text-decoration:underline;">$1</a>')
+          }}
         />
 
         {/* Back link */}
