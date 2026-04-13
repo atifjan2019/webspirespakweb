@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --color-red: #e8192c;
+  --color-dark: #0c0c0c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0c0c0c;
+  color: #ffffff;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #141414;
+}
+::-webkit-scrollbar-thumb {
+  background: #e8192c;
+  border-radius: 2px;
+}
+
+/* WordPress content styles */
+.wp-content h1,
+.wp-content h2,
+.wp-content h3,
+.wp-content h4 {
+  font-family: var(--font-heading);
+  color: #ffffff;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.wp-content p {
+  color: #9a9a9a;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.wp-content a {
+  color: #e8192c;
+  text-decoration: underline;
+}
+
+.wp-content ul,
+.wp-content ol {
+  color: #9a9a9a;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.wp-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.wp-content blockquote {
+  border-left: 3px solid #e8192c;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: #d4d4d4;
+}
