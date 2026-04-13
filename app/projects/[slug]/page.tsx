@@ -46,102 +46,120 @@ export default async function ProjectPage({ params }: Props) {
   const categories = getPostCategories(project);
 
   return (
-    <div className="min-h-screen bg-brand-dark pt-24">
-      {/* Hero image for project */}
-      {image && (
-        <div className="relative h-64 sm:h-[500px] w-full overflow-hidden">
+    <div className="min-h-screen bg-brand-dark pb-24">
+      {/* Full-width Hero Section with Parallax Effect */}
+      <div className="relative w-full h-[60vh] min-h-[450px] max-h-[700px] flex flex-col justify-end">
+        {image ? (
           <Image
             src={image}
             alt={project.title.rendered}
             fill
-            className="object-cover"
+            className="object-cover opacity-60 mix-blend-screen"
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent" />
-        </div>
-      )}
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-dark-2 to-brand-dark" />
+        )}
+        
+        {/* Gradients to seamlessly blend hero perfectly into content */}
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/80 via-transparent to-transparent" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
-        {/* Breadcrumb */}
-        <div className="flex flex-wrap items-center gap-2 text-sm text-brand-gray mb-8">
-          <Link href="/" className="hover:text-white transition-colors">
-            Home
-          </Link>
-          <span>/</span>
-          <Link href="/portfolio" className="hover:text-white transition-colors">
-            Portfolio
-          </Link>
-          <span>/</span>
-          <span 
-            className="text-brand-red font-semibold tracking-wide truncate"
-            dangerouslySetInnerHTML={{ __html: project.title.rendered }}
-          />
-        </div>
+        <div className="relative z-10 max-w-5xl w-full mx-auto px-4 sm:px-6 pb-12">
+          {/* Breadcrumb */}
+          <div className="flex flex-wrap items-center gap-2 text-sm text-brand-gray/80 font-medium tracking-wide pb-6">
+            <Link href="/" className="hover:text-white transition-colors">
+              Home
+            </Link>
+            <span className="text-white/20">/</span>
+            <Link href="/portfolio" className="hover:text-white transition-colors">
+              Portfolio
+            </Link>
+            <span className="text-white/20">/</span>
+            <span 
+              className="text-brand-red font-semibold truncate"
+              dangerouslySetInnerHTML={{ __html: project.title.rendered }}
+            />
+          </div>
 
-        {/* Header content */}
-        <div className="mb-12">
-          {/* Categories */}
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-3 mb-6">
             {categories.map((cat) => (
-              <span key={cat} className="bg-brand-red/10 text-brand-red border border-brand-red/20 px-4 py-1.5 rounded-full text-xs font-heading font-semibold tracking-widest uppercase">
+              <span key={cat} className="bg-brand-red text-white px-4 py-1.5 rounded-full text-[11px] font-heading font-bold tracking-widest uppercase shadow-lg shadow-brand-red/20">
                 {cat}
               </span>
             ))}
           </div>
           
-          {/* Title */}
           <h1
-            className="font-heading font-extrabold text-4xl sm:text-6xl text-white leading-tight"
+            className="font-heading font-black text-5xl sm:text-6xl md:text-7xl text-white leading-[1.1] tracking-tight drop-shadow-2xl"
             dangerouslySetInnerHTML={{ __html: project.title.rendered }}
           />
-
-          {/* Meta Information (Custom Fields) */}
-          {(project.meta?.year || project.meta?.country || project.meta?.services) && (
-            <div className="mt-8 flex flex-wrap gap-6 items-center bg-brand-dark-2/50 border border-white/5 p-6 rounded-2xl backdrop-blur-md">
-              {project.meta.year && (
-                <div className="flex flex-col">
-                  <span className="text-brand-gray text-[10px] uppercase tracking-wider mb-1">Year</span>
-                  <span className="text-white font-heading font-bold text-lg">{project.meta.year}</span>
-                </div>
-              )}
-              {project.meta.country && (
-                <>
-                  <div className="w-px h-8 bg-white/10 hidden sm:block"></div>
-                  <div className="flex flex-col">
-                    <span className="text-brand-gray text-[10px] uppercase tracking-wider mb-1">Country</span>
-                    <span className="text-white font-heading font-bold text-lg">{project.meta.country}</span>
-                  </div>
-                </>
-              )}
-              {project.meta.services && Object.entries(project.meta.services).some(([_, val]) => val === 'true') && (
-                <>
-                  <div className="w-px h-8 bg-white/10 hidden sm:block"></div>
-                  <div className="flex flex-col">
-                    <span className="text-brand-gray text-[10px] uppercase tracking-wider mb-2">Services Provided</span>
-                    <div className="flex flex-wrap gap-2">
-                      {Object.entries(project.meta.services)
-                        .filter(([_, val]) => val === 'true')
-                        .map(([serviceName]) => (
-                          <span key={serviceName} className="text-brand-gray-light bg-black/30 border border-white/5 text-xs px-3 py-1 rounded-md">
-                            {serviceName}
-                          </span>
-                      ))}
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-          )}
         </div>
+      </div>
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 -mt-8 relative z-20">
+        {/* Meta Information (Custom Fields) - Glassmorphism floating bar */}
+        {(project.meta?.year || project.meta?.country || project.meta?.services) && (
+          <div className="flex flex-wrap gap-x-12 gap-y-6 items-center bg-brand-dark-2/80 border border-white/10 p-6 md:p-8 rounded-3xl backdrop-blur-xl shadow-2xl mb-16 transform transition-all hover:border-white/20">
+            {project.meta.year && (
+              <div className="flex flex-col">
+                <span className="text-brand-gray text-[11px] uppercase tracking-widest font-semibold mb-2">Year</span>
+                <span className="text-white font-heading font-bold text-xl">{project.meta.year}</span>
+              </div>
+            )}
+            
+            {project.meta.country && (
+              <div className="flex flex-col relative">
+                {project.meta.year && <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-px h-10 bg-white/10 hidden sm:block"></div>}
+                <span className="text-brand-gray text-[11px] uppercase tracking-widest font-semibold mb-2">Country</span>
+                <span className="text-white font-heading font-bold text-xl">{project.meta.country}</span>
+              </div>
+            )}
+            
+            {project.meta.services && Object.entries(project.meta.services).some(([_, val]) => val === 'true') && (
+              <div className="flex flex-col relative flex-1 min-w-[200px]">
+                {(project.meta.year || project.meta.country) && <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-px h-10 bg-white/10 hidden md:block"></div>}
+                <span className="text-brand-gray text-[11px] uppercase tracking-widest font-semibold mb-3">Services Provided</span>
+                <div className="flex flex-wrap gap-2">
+                  {Object.entries(project.meta.services)
+                    .filter(([_, val]) => val === 'true')
+                    .map(([serviceName]) => (
+                      <span key={serviceName} className="text-white/90 bg-white/5 border border-white/10 text-[13px] font-medium px-4 py-1.5 rounded-lg hover:bg-white/10 transition-colors">
+                        {serviceName}
+                      </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Action Link if provided */}
+            {project.meta.link && (
+              <div className="ml-auto w-full md:w-auto mt-2 md:mt-0">
+                <a 
+                  href={project.meta.link.startsWith('http') ? project.meta.link : `https://${project.meta.link}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full md:w-auto items-center justify-center gap-2 bg-brand-red hover:bg-red-600 text-white font-heading font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-brand-red/30"
+                >
+                  Visit Project
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* WordPress Project Content Wrapper */}
-        <div className="wp-content bg-brand-dark-2 p-8 sm:p-12 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden">
-          {/* Decorator Glow */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-red/5 blur-[100px] pointer-events-none rounded-full" />
+        <div className="wp-content bg-brand-dark-2/30 px-6 py-12 sm:p-16 rounded-[2.5rem] border border-white/5 relative overflow-hidden backdrop-blur-sm">
+          {/* Subtle Ambient Glow */}
+          <div className="absolute top-1/4 -right-32 w-96 h-96 bg-brand-red/10 blur-[120px] pointer-events-none rounded-full" />
+          <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-brand-red/5 blur-[120px] pointer-events-none rounded-full" />
           
           <div
-            className="relative z-10"
+            className="relative z-10 max-w-4xl mx-auto"
             dangerouslySetInnerHTML={{ __html: project.content.rendered }}
           />
         </div>

@@ -49,45 +49,90 @@ h6 {
   border-radius: 2px;
 }
 
-/* WordPress content styles */
+/* WordPress / Elementor content styles override */
+.wp-content {
+  color: #9a9a9a;
+  font-family: var(--font-body);
+}
+
+.wp-content .elementor-section-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.wp-content .elementor-heading-title,
 .wp-content h1,
 .wp-content h2,
 .wp-content h3,
-.wp-content h4 {
-  font-family: var(--font-heading);
-  color: #ffffff;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
+.wp-content h4,
+.wp-content h5,
+.wp-content h6 {
+  font-family: var(--font-heading) !important;
+  color: #ffffff !important;
+  line-height: 1.3 !important;
+  margin-bottom: 0.5rem !important;
+  margin-top: 1rem !important;
 }
 
-.wp-content p {
-  color: #9a9a9a;
-  line-height: 1.8;
-  margin-bottom: 1.25rem;
+.wp-content p,
+.wp-content .elementor-widget-text-editor,
+.wp-content .elementor-text-editor {
+  color: #9a9a9a !important;
+  line-height: 1.8 !important;
+  margin-bottom: 1.5rem !important;
+  font-size: 1.1rem !important;
 }
 
-.wp-content a {
-  color: #e8192c;
-  text-decoration: underline;
+.wp-content a,
+.wp-content .elementor-button {
+  color: #e8192c !important;
+  text-decoration: none !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.wp-content a:hover {
+  opacity: 0.7;
 }
 
 .wp-content ul,
-.wp-content ol {
-  color: #9a9a9a;
-  padding-left: 1.5rem;
-  margin-bottom: 1.25rem;
+.wp-content ol,
+.wp-content .elementor-icon-list-items {
+  color: #9a9a9a !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  line-height: 1.8 !important;
+  font-size: 1.1rem !important;
+}
+
+.wp-content li, 
+.wp-content .elementor-icon-list-item {
+  margin-bottom: 0.5rem !important;
 }
 
 .wp-content img {
-  max-width: 100%;
-  border-radius: 8px;
-  margin: 1.5rem 0;
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 16px !important;
+  margin: 2rem 0 !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.wp-content iframe {
+  width: 100% !important;
+  border-radius: 16px !important;
+  margin: 2rem 0 !important;
+  aspect-ratio: 16/9;
 }
 
 .wp-content blockquote {
-  border-left: 3px solid #e8192c;
-  padding-left: 1.5rem;
-  margin: 2rem 0;
-  font-style: italic;
-  color: #d4d4d4;
+  border-left: 3px solid #e8192c !important;
+  padding-left: 1.5rem !important;
+  margin: 2rem 0 !important;
+  font-style: italic !important;
+  color: #d4d4d4 !important;
+  background: rgba(255,255,255,0.02);
+  padding: 1.5rem;
+  border-radius: 0 12px 12px 0;
 }
