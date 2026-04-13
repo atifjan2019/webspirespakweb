@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   const processedContent = post.content.rendered
-    .replace(/https:\/\/wordpress-1196470-4364598\.cloudwaysapps\.com\/([a-zA-Z0-9_-]+)\/?/g, "https://webspires.com.pk/blogs/$1")
+    .replace(/https:\/\/wordpress-1196470-4364598\.cloudwaysapps\.com\/([a-zA-Z0-9_-]+)\/?/g, "https://www.webspires.com.pk/blogs/$1")
     .replace(/\b(web development)\b/gi, '<a href="/services/web-development" style="color:#e8192c;text-decoration:underline;">$1</a>')
     .replace(/\b(SEO|Search Engine Optimization)\b/gi, '<a href="/services/seo" style="color:#e8192c;text-decoration:underline;">$1</a>')
     .replace(/\b(AI search visibility|AI search results)\b/gi, '<a href="/services/geo-optimisation" style="color:#e8192c;text-decoration:underline;">$1</a>');
