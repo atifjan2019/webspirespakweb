@@ -10,7 +10,7 @@ import {
 } from "@/lib/wordpress";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -19,7 +19,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const project = await getProjectBySlug(params.slug);
+  const resolvedParams = await params;
+  const project = await getProjectBySlug(resolvedParams.slug);
   if (!project) return {};
 
   const seo = project.yoast_head_json;
@@ -39,7 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const revalidate = 3600;
 
 export default async function ProjectPage({ params }: Props) {
-  const project = await getProjectBySlug(params.slug);
+  const resolvedParams = await params;
+  const project = await getProjectBySlug(resolvedParams.slug);
   if (!project) notFound();
 
   const image = getFeaturedImage(project);
