@@ -28,9 +28,9 @@ const organizationSchema = {
     email: "hello@webspires.com.pk",
   },
   sameAs: [
-    "https://www.linkedin.com/company/webspires",
+    "https://www.linkedin.com/in/atif-jan-20703017a/",
     "https://www.instagram.com/atif._.jan",
-    "https://www.facebook.com/webspires"
+    "https://www.facebook.com/atifjan344"
   ],
 };
 
