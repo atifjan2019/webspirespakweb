@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { notFound } from "next/navigation";
 import {
   getAllPosts,
@@ -113,20 +114,10 @@ export default async function BlogPostPage({ params }: Props) {
       )}
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-brand-gray mb-8">
-          <Link href="/" className="hover:text-white transition-colors">
-            Home
-          </Link>
-          <span>/</span>
-          <Link href="/blogs" className="hover:text-white transition-colors">
-            Blog
-          </Link>
-          <span>/</span>
-          <span className="text-white truncate"
-            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-          />
-        </div>
+        <Breadcrumbs items={[
+          { label: "Blog", href: "/blogs" },
+          { label: post.title.rendered, href: `/blogs/${post.slug}` }
+        ]} />
 
         {/* Title */}
         <h1
