@@ -85,7 +85,7 @@ export default function PortfolioGrid({ projects }: { projects: Project[] }) {
 
             {/* Content Section */}
             <div className="relative z-10 p-8 transform transition-transform duration-500">
-              <h3 
+              <h2 
                 className="font-heading font-extrabold text-white text-2xl mb-3 group-hover:text-brand-red transition-colors duration-300 line-clamp-2"
                 dangerouslySetInnerHTML={{ __html: project.title.rendered }}
               />
