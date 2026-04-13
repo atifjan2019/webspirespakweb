@@ -39,6 +39,15 @@ export async function getRecentPosts(count = 3): Promise<WPPost[]> {
   );
 }
 
+// ─── Projects ────────────────────────────────────────────────────────────────
+
+export async function getAllProjects(): Promise<WPPost[]> {
+  return fetchWP<WPPost[]>(
+    "/projects?_embed&per_page=100&status=publish",
+    3600
+  );
+}
+
 // ─── Pages ───────────────────────────────────────────────────────────────────
 
 export async function getPageBySlug(slug: string): Promise<WPPage | null> {
@@ -76,4 +85,14 @@ export function getFeaturedImage(post: WPPost): string | null {
 
 export function getAuthorName(post: WPPost): string {
   return post._embedded?.author?.[0]?.name || "Webspires";
+}
+
+export function getPostCategories(post: WPPost): string[] {
+  if (!post._embedded || !post._embedded["wp:term"]) return ["Uncategorized"];
+  
+  // wp:term is an array of arrays (one array per taxonomy)
+  const categories = post._embedded["wp:term"].flat().filter(term => term.taxonomy === "categories" || term.taxonomy === "project_category");
+  
+  if (categories.length === 0) return ["Uncategorized"];
+  return categories.map(cat => cat.name);
 }
