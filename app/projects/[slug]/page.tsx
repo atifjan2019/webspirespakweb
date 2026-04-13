@@ -112,7 +112,7 @@ export default async function ProjectPage({ params }: Props) {
             {project.meta.country && (
               <div className="flex flex-col relative">
                 {project.meta.year && <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-px h-10 bg-white/10 hidden sm:block"></div>}
-                <span className="text-brand-gray text-[11px] uppercase tracking-widest font-semibold mb-2">Country</span>
+                <span className="text-brand-gray text-[11px] uppercase tracking-widest font-semibold mb-2">Based In</span>
                 <span className="text-white font-heading font-bold text-xl">{project.meta.country}</span>
               </div>
             )}
