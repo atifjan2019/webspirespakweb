@@ -108,12 +108,12 @@ export default async function SingleServicePage({ params }: { params: Promise<{ 
         
         {/* Main Content & Features */}
         <div className="bg-brand-dark-2 border border-white/5 rounded-3xl p-8 sm:p-12 mb-16">
-          <h2 className="font-heading font-bold text-2xl text-white mb-6">What We Offer</h2>
+          <h2 className="font-heading font-bold text-2xl text-white mb-6">What Does Our {service.title} Service Include?</h2>
           <p className="text-brand-gray leading-relaxed mb-8">
             {service.content}
           </p>
           
-          <h3 className="font-heading font-bold text-lg text-white mb-4">Key Features & Deliverables</h3>
+          <h3 className="font-heading font-bold text-lg text-white mb-4">What Are the Key Deliverables?</h3>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
             {service.features.map((f) => (
               <li

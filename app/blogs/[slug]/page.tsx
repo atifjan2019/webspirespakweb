@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import TableOfContents from "@/components/blog/TableOfContents";
+import RelatedPosts from "@/components/blog/RelatedPosts";
 import { notFound } from "next/navigation";
 import {
   getAllPosts,
@@ -37,6 +39,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description = "Explore the rise of GPT-OSS open-source models — why free AI alternatives are disrupting the market and how to deploy them for your own business today.";
   }
 
+  // Use dynamic featured image if available, fall back to site-wide OG
+  const ogImage = image
+    ? { url: image, width: 1200, height: 630 }
+    : { url: "https://webspires.com.pk/og-image.jpg", width: 1200, height: 630 };
+
   return {
     title: seo?.title || plainTitle,
     description: description,
@@ -51,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       modifiedTime: post.modified,
       authors: [author],
       url: `https://webspires.com.pk/blogs/${post.slug}`,
-      images: [{ url: "https://webspires.com.pk/og-image.jpg", width: 1200, height: 630 }],
+      images: [ogImage],
     },
   };
 }
@@ -67,7 +74,7 @@ export default async function BlogPostPage({ params }: Props) {
   const author = getAuthorName(post);
   const plainTitle = post.title.rendered.replace(/<[^>]+>/g, "");
 
-  const schema = {
+  const blogSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: plainTitle,
@@ -90,13 +97,23 @@ export default async function BlogPostPage({ params }: Props) {
       "@type": "WebPage",
       "@id": `https://webspires.com.pk/blogs/${post.slug}`,
     },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [".wp-content h2", ".wp-content p:first-of-type", ".wp-content p:nth-of-type(2)"]
+    },
   };
+
+  const processedContent = post.content.rendered
+    .replace(/https:\/\/wordpress-1196470-4364598\.cloudwaysapps\.com\/([a-zA-Z0-9_-]+)\/?/g, "https://webspires.com.pk/blogs/$1")
+    .replace(/\b(web development)\b/gi, '<a href="/services/web-development" style="color:#e8192c;text-decoration:underline;">$1</a>')
+    .replace(/\b(SEO|Search Engine Optimization)\b/gi, '<a href="/services/seo" style="color:#e8192c;text-decoration:underline;">$1</a>')
+    .replace(/\b(AI search visibility|AI search results)\b/gi, '<a href="/services/geo-optimisation" style="color:#e8192c;text-decoration:underline;">$1</a>');
 
   return (
     <article className="min-h-screen bg-brand-dark pt-24">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
       />
       {/* Hero image */}
       {image && (
@@ -135,16 +152,17 @@ export default async function BlogPostPage({ params }: Props) {
           <time dateTime={post.date}>{formatDate(post.date)}</time>
         </div>
 
+        {/* Table of Contents */}
+        <TableOfContents />
+
         {/* Content */}
         <div
           className="wp-content"
-          dangerouslySetInnerHTML={{ __html: post.content.rendered
-            .replace(/https:\/\/wordpress-1196470-4364598\.cloudwaysapps\.com\/([a-zA-Z0-9_-]+)\/?/g, "https://webspires.com.pk/blogs/$1")
-            .replace(/\b(web development)\b/gi, '<a href="/services/web-development" style="color:#e8192c;text-decoration:underline;">$1</a>')
-            .replace(/\b(SEO|Search Engine Optimization)\b/gi, '<a href="/services/seo" style="color:#e8192c;text-decoration:underline;">$1</a>')
-            .replace(/\b(AI search visibility|AI search results)\b/gi, '<a href="/services/geo-optimisation" style="color:#e8192c;text-decoration:underline;">$1</a>')
-          }}
+          dangerouslySetInnerHTML={{ __html: processedContent }}
         />
+
+        {/* Related Posts */}
+        <RelatedPosts currentSlug={post.slug} />
 
         {/* Back link */}
         <div className="mt-16 pt-8 border-t border-white/10">
