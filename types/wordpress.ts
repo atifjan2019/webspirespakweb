@@ -7,6 +7,14 @@ export interface WPPost {
   date: string;
   modified: string;
   featured_media: number;
+  class_list?: string[];
+  meta?: {
+    year?: string;
+    country?: string;
+    logo?: string;
+    link?: string;
+    services?: Record<string, string>;
+  };
   _embedded?: {
     "wp:featuredmedia"?: Array<{
       source_url: string;
@@ -14,7 +22,7 @@ export interface WPPost {
       media_details: { width: number; height: number };
     }>;
     author?: Array<{ name: string; avatar_urls: { "96": string } }>;
-    "wp:term"?: Array<Array<{ id: number; name: string; slug: string; taxonomy: string }>>;
+    "wp:term"?: Array<any>;
   };
   yoast_head_json?: {
     title: string;

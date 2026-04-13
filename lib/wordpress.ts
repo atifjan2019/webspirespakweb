@@ -96,11 +96,29 @@ export function getAuthorName(post: WPPost): string {
 }
 
 export function getPostCategories(post: WPPost): string[] {
-  if (!post._embedded || !post._embedded["wp:term"]) return ["Uncategorized"];
-  
-  // wp:term is an array of arrays (one array per taxonomy)
-  const categories = post._embedded["wp:term"].flat().filter(term => term.taxonomy === "categories" || term.taxonomy === "project_category");
-  
+  const categories: string[] = [];
+
+  // 1. Try to fetch from embedded terms (Wait, WP REST API might return 401 rest_forbidden_context)
+  if (post._embedded && post._embedded["wp:term"]) {
+    const validTerms = post._embedded["wp:term"].flat().filter(term => term && !term.code);
+    const validCats = validTerms.filter(term => term.taxonomy === "categories" || term.taxonomy === "project_category");
+    categories.push(...validCats.map(cat => cat.name));
+  }
+
+  // 2. Fallback to extracting from class_list (e.g., "categories-web-development")
+  if (categories.length === 0 && post.class_list) {
+    const classCats = post.class_list
+      .filter((c) => c.startsWith("categories-") || c.startsWith("project_category-"))
+      .map((c) => {
+        let name = c.replace(/^(categories-|project_category-)/, "");
+        // Capitalize and replace dashes
+        return name.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+      });
+    categories.push(...classCats);
+  }
+
   if (categories.length === 0) return ["Uncategorized"];
-  return categories.map(cat => cat.name);
+  
+  // Return unique categories
+  return Array.from(new Set(categories));
 }

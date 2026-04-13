@@ -95,6 +95,44 @@ export default async function ProjectPage({ params }: Props) {
             className="font-heading font-extrabold text-4xl sm:text-6xl text-white leading-tight"
             dangerouslySetInnerHTML={{ __html: project.title.rendered }}
           />
+
+          {/* Meta Information (Custom Fields) */}
+          {(project.meta?.year || project.meta?.country || project.meta?.services) && (
+            <div className="mt-8 flex flex-wrap gap-6 items-center bg-brand-dark-2/50 border border-white/5 p-6 rounded-2xl backdrop-blur-md">
+              {project.meta.year && (
+                <div className="flex flex-col">
+                  <span className="text-brand-gray text-[10px] uppercase tracking-wider mb-1">Year</span>
+                  <span className="text-white font-heading font-bold text-lg">{project.meta.year}</span>
+                </div>
+              )}
+              {project.meta.country && (
+                <>
+                  <div className="w-px h-8 bg-white/10 hidden sm:block"></div>
+                  <div className="flex flex-col">
+                    <span className="text-brand-gray text-[10px] uppercase tracking-wider mb-1">Country</span>
+                    <span className="text-white font-heading font-bold text-lg">{project.meta.country}</span>
+                  </div>
+                </>
+              )}
+              {project.meta.services && Object.entries(project.meta.services).some(([_, val]) => val === 'true') && (
+                <>
+                  <div className="w-px h-8 bg-white/10 hidden sm:block"></div>
+                  <div className="flex flex-col">
+                    <span className="text-brand-gray text-[10px] uppercase tracking-wider mb-2">Services Provided</span>
+                    <div className="flex flex-wrap gap-2">
+                      {Object.entries(project.meta.services)
+                        .filter(([_, val]) => val === 'true')
+                        .map(([serviceName]) => (
+                          <span key={serviceName} className="text-brand-gray-light bg-black/30 border border-white/5 text-xs px-3 py-1 rounded-md">
+                            {serviceName}
+                          </span>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </div>
 
         {/* WordPress Project Content Wrapper */}
