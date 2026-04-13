@@ -5,6 +5,17 @@ export const metadata: Metadata = {
   title: "Portfolio",
   description:
     "Projects delivered by Webspires — websites, digital marketing campaigns, and brand identities.",
+  alternates: {
+    canonical: "https://webspires.com.pk/portfolio",
+  },
+};
+
+const portfolioSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Webspires Portfolio",
+  description: "Projects delivered by Webspires — websites, digital marketing campaigns, and brand identities.",
+  url: "https://webspires.com.pk/portfolio",
 };
 
 import { getAllProjects, getPostCategories, stripHtml, getFeaturedImage } from "@/lib/wordpress";
@@ -30,6 +41,10 @@ export default async function PortfolioPage() {
 
   return (
     <div className="min-h-screen bg-brand-dark pt-32 pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="max-w-2xl mb-16">

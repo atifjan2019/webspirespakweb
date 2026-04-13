@@ -6,11 +6,34 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Learn about Webspires — who we are, what we stand for, and why businesses choose us as their digital partner.",
+  alternates: {
+    canonical: "https://webspires.com.pk/about",
+  },
+};
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About Webspires",
+  description: "Learn about Webspires — who we are, what we stand for, and why businesses choose us as their digital partner.",
+  url: "https://webspires.com.pk/about",
+  publisher: {
+    "@type": "Organization",
+    name: "Webspires",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://webspires.com.pk/logo.png"
+    }
+  }
 };
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-brand-dark pt-32 pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">

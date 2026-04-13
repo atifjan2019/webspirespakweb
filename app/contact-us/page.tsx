@@ -4,11 +4,32 @@ export const metadata: Metadata = {
   title: "Contact Us",
   description:
     "Get in touch with Webspires. Reach out via email or WhatsApp and we'll get back to you within 24 hours.",
+  alternates: {
+    canonical: "https://webspires.com.pk/contact-us",
+  },
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Webspires",
+  image: "https://webspires.com.pk/logo.png",
+  email: "hello@webspires.com.pk",
+  telephone: "+923448959905",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "PK"
+  },
+  url: "https://webspires.com.pk/contact-us"
 };
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-brand-dark pt-32 pb-24 relative overflow-hidden flex flex-col justify-center">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
       {/* Background Ambient Glows */}
       <div className="absolute top-1/4 -right-32 w-[500px] h-[500px] bg-brand-red/10 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 -left-64 w-[600px] h-[600px] bg-brand-red/5 blur-[150px] rounded-full pointer-events-none" />

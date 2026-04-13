@@ -27,7 +27,11 @@ const organizationSchema = {
     contactType: "customer service",
     email: "hello@webspires.com.pk",
   },
-  sameAs: [],
+  sameAs: [
+    "https://www.linkedin.com/company/webspires",
+    "https://www.instagram.com/webspires.pk",
+    "https://www.facebook.com/webspires"
+  ],
 };
 
 const websiteSchema = {

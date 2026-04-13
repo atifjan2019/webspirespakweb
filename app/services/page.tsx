@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "Web development, digital marketing, GEO optimisation, SEO, branding, and social media services from Webspires.",
+  alternates: {
+    canonical: "https://webspires.com.pk/services",
+  },
 };
 
 export default function ServicesPage() {

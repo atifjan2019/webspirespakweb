@@ -66,7 +66,7 @@ export default async function BlogPostPage({ params }: Props) {
     datePublished: post.date,
     dateModified: post.modified,
     author: {
-      "@type": "Person",
+      "@type": "Organization",
       name: author,
     },
     publisher: {
