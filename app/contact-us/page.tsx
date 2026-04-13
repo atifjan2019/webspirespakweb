@@ -60,12 +60,12 @@ export default function ContactPage() {
                     WhatsApp
                   </p>
                   <a
-                    href="https://wa.me/447000000000"
+                    href="https://wa.me/923448959905"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white hover:text-brand-red transition-colors duration-200"
                   >
-                    +44 7000 000000
+                    +92 344 8959905
                   </a>
                 </div>
               </div>

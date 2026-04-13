@@ -134,7 +134,7 @@ vercel
 - [ ] Update client logos in `/components/home/ClientLogos.tsx`
 - [ ] Add actual logo image to `/public/` and update Navbar
 - [ ] Add hero background image to `/public/hero-bg.jpg`
-- [ ] Update WhatsApp number in `/components/ui/WhatsAppWidget.tsx`
+- [x] Update WhatsApp number in `/components/ui/WhatsAppWidget.tsx`
 - [ ] Update contact email/phone in `/app/contact-us/page.tsx`
 - [ ] Set up contact form (Resend or Formspree)
 - [ ] Add `og-image.jpg` to `/public/` for social sharing
